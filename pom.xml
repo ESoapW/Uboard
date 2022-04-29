@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.group</groupId>
+  <artifactId>5007project</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <description>Build an app with GraphQL + SpringBoot + Netflix DGS + React + MyBatis-Plus + PostgreSQL</description>
+  <!-- 继承springboot父项目 -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.5.6</version>
+  </parent>
+
+  <name>5007project Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://groupproject.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <start-class>com.group.Application</start-class>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.netflix.graphql.dgs</groupId>
+        <artifactId>graphql-dgs-platform-dependencies</artifactId>
+        <!-- The DGS BOM/platform dependency. This is the only place you set version of DGS -->
+        <version>4.9.16</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.netflix.graphql.dgs</groupId>
+      <artifactId>graphql-dgs-spring-boot-starter</artifactId>
+    </dependency>
+
+     <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+      <version>5.6.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.5.0</version>
+    </dependency>
+<!--发送邮件的第三方api-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+<!--    帮助自动添加get和set方法-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.18.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+
+
+  </dependencies>
+
+  <build>
+    <finalName>5007project</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+            <archive>
+              <manifest>
+                <mainClass>com.group.Application</mainClass>
+              </manifest>
+            </archive>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <fork>true</fork>
+            <mainClass>com.group.Application</mainClass>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+<!--        <plugin>-->
+<!--          <artifactId>maven-war-plugin</artifactId>-->
+<!--          <version>3.2.2</version>-->
+<!--        </plugin>-->
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>8</source>
+                  <target>8</target>
+              </configuration>
+          </plugin>
+<!--        <plugin>-->
+<!--          <groupId>com.github.eirslett</groupId>-->
+<!--          <artifactId>frontend-maven-plugin</artifactId>-->
+<!--          <version>1.6</version>-->
+<!--          <executions>-->
+<!--            <execution>-->
+<!--              <id>install node and npm</id>-->
+<!--              <goals>-->
+<!--                <goal>install-node-and-npm</goal>-->
+<!--              </goals>-->
+<!--              <phase>generate-resources</phase>-->
+<!--              <configuration>-->
+<!--                <installDirectory>target</installDirectory>-->
+<!--                <workingDirectory>frontend</workingDirectory>-->
+<!--                <nodeVersion>v17.7.0</nodeVersion>-->
+<!--                <npmVersion>8.5.2</npmVersion>-->
+<!--              </configuration>-->
+<!--            </execution>-->
+<!--            <execution>-->
+<!--              <id>npm install</id>-->
+<!--              <goals>-->
+<!--                <goal>npm</goal>-->
+<!--              </goals>-->
+<!--              <phase>generate-resources</phase>-->
+<!--              <configuration>-->
+<!--                <arguments>install</arguments>-->
+<!--                <installDirectory>target</installDirectory>-->
+<!--                <workingDirectory>frontend</workingDirectory>-->
+<!--              </configuration>-->
+<!--            </execution>-->
+<!--            <execution>-->
+<!--              <id>npm run build</id>-->
+<!--              <goals>-->
+<!--                <goal>npm</goal>-->
+<!--              </goals>-->
+<!--              <phase>compile</phase>-->
+<!--              <configuration>-->
+<!--                <arguments>run build</arguments>-->
+<!--                <installDirectory>target</installDirectory>-->
+<!--                <workingDirectory>frontend</workingDirectory>-->
+<!--              </configuration>-->
+<!--            </execution>-->
+<!--          </executions>-->
+<!--          <configuration>-->
+<!--          <nodeVersion>v17.7.0</nodeVersion>-->
+<!--          <npmVersion>8.5.2</npmVersion>-->
+<!--          <nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>-->
+<!--          <npmDownloadRoot>https://registry.npm.taobao.org/npm/-/</npmDownloadRoot>-->
+
+<!--          </configuration>-->
+<!--        </plugin>-->
+      </plugins>
+  </build>
+</project>

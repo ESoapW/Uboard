@@ -1,0 +1,35 @@
+spring:
+  datasource:
+#AWS
+#    url: jdbc:postgresql://database5007.cxiwjptybixg.us-west-2.rds.amazonaws.com:5432/postgres
+#    username: postgres
+#    password: changeme
+
+#mylocalhost
+    url: jdbc:postgresql://localhost:5431/postgres
+    username: postgres
+    password: changeme
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+    prefix: classpath:/image/
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      file-size-threshold: 10MB
+
+  profiles:
+    active: 163
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: gd008524@163.com
+    password: YGFDAVZVRGIOCBXC
+
+

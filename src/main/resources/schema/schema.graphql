@@ -1,0 +1,91 @@
+#系统创建活动
+type Activity {
+    activityId: Int! #活动ID
+    initializer: User! #活动发起者
+    applications: [Application!] #该活动所有的申请信息
+    participants: [User!] #活动参与者 ---对application表select activityID, 过滤状态为申请成功的
+    activityName: String! #活动名称
+    imageUrl: String! #活动图片
+    startTime: String! #活动开始时间
+    endTime: String! #活动终止时间
+    location: String! #活动地点
+    description: String! #活动描述
+    numOfParticipants: Int! #活动参与人数/该数字为发起者的输入，是一个参考数字
+    funds: Int! #活动预算
+    requirements: String! #活动参与要求
+}
+
+#用户创建活动的输入
+input ActivityCreateInput {
+    activityName: String! #活动名称
+    imageUrl: String! #活动图片
+    startTime: String! #活动开始时间
+    endTime: String! #活动终止时间
+    location: String! #活动地点
+    description: String! #活动描述
+    numOfParticipants: Int! #活动参与人数/该数字为发起者的输入，是一个参考数字
+    funds: Int! #活动预算
+    requirements: String! #活动参与要求
+}
+
+#系统创建用户
+type User {
+    userId: Int! #用户ID
+    initializedActivityList: [Activity!] #该用户发起的活动
+    participatedActivityList: [Activity!] #该用户参与的活动 ------对application表select userID, 过滤状态为申请成功的
+    applications: [Application!] #该用户提交的申请
+    userName: String! #用户名字
+    userSchool: String! #用户学校
+    userGrade: String! #用户年级
+    email: String! #用户邮箱
+    phoneNumber: String! #用户电话号码
+    password: String! #用户密码
+}
+
+#用户注册时的输入
+input UserRegisterInput {
+    userName: String! #用户名字
+    userSchool: String! #用户学校
+    userGrade: String! #用户年级
+    email: String! #用户邮箱
+    phoneNumber: String! #用户电话号码
+    password:String! #用户密码
+}
+
+#系统创建申请
+type Application {
+    applicationId: Int!
+    applicant: User!
+    activity: Activity!
+    comments: String!
+    applicationStatus: String!
+}
+
+#用户申请活动时的输入
+input ApplicationCreateInput {
+    comments: String!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+type Query {
+    activity: [Activity!] #查询所有活动列表
+    user: [User!] #查询所有用户列表
+    application: [Application!] #查询所有申请列表
+    userWithUserId(userId: Int): User #根据userId查询某个user的信息
+    activityWithActivityId(activityId: Int): Activity #查询某个activity的信息
+    login(loginInput: LoginInput!): User!
+}
+
+type Mutation {
+    createActivity(activityCreateInput: ActivityCreateInput, initializerId: Int): Activity!
+    createApplication(applicationCreateInput: ApplicationCreateInput, applicantId: Int, activityId: Int): Application!
+    registerUser(userRegisterInput: UserRegisterInput): User!
+    applicationApprove(applicationId: Int): Application!
+    applicationDeny(applicationId: Int): Application!
+}
+
+
