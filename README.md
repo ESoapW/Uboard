@@ -28,7 +28,7 @@ IT5007 Project
     screen java -jar target/5007project.jar 
     ```
 
-    Detached from screen (ctrl/cmd + A + D)
+    Detach from screen (ctrl/cmd + A + D)
 
 4. Set up and start file server
 
@@ -37,7 +37,7 @@ IT5007 Project
     screen http-server ./
     ```
 
-    Detached from screen (ctrl/cmd + A + D)
+    Detach from screen (ctrl/cmd + A + D)
 
 5. Start frond-end server
 
