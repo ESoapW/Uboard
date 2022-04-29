@@ -14,7 +14,7 @@ IT5007 Project
 
     ```
     git clone https://github.com/ESoapW/Uboard.git
-    cd
+    cd Uboard/
     ```   
 
 2. Set up and start PostgreSQL database
@@ -25,8 +25,9 @@ IT5007 Project
     docker compose up
     ```
 
-    Go to `localhost:5050`  
-    Add a new server  
+    Go to `localhost:5050/browser`, password: admin   
+    Add a new server with properties:  
+    Port: 5432, Database: postgres, Username: postgres, Password: changeme   
     Run the sql query in `sql/activity.sql` to initialize the database
 
 3. Start back-end server
