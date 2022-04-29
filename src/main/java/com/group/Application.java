@@ -4,12 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableAutoConfiguration // 作用: 开启自动配置 初始化spring环境 springmvc环境
-@ComponentScan // 作用: 用来扫描相关注解 扫描范围 当前入口类所在的包及子包(com.group及其子包)
+@EnableAutoConfiguration // Enable automatic configuration. Initialize the Spring environment
+@ComponentScan // The package and subpackages of the current entry class (com.group and its subpackages)
 public class Application {
     public static void main(String[] args) {
-        // springApplication: spring应用类    作用: 用来启动springboot应用
-        // 参数1: 传入入口类 类对象   参数2: main函数的参数
+        // Used to start the SpringBoot application
+        // Parameter 1: the entry class object parameter 2: the main function parameter
         SpringApplication.run(Application.class, args);
 
     }

@@ -15,11 +15,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class AppConfig implements WebMvcConfigurer {
     @Bean
+    //Configuration: Passwords are encrypted when stored in the database
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Override
+    //Resolve cross-domain issues of back-end services
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**");
     }

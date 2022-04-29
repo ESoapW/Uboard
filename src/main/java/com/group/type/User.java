@@ -21,7 +21,6 @@ public class User {
     public static User fromUserEntity(UserEntity userEntity){
         User user = new User();
         user.setUserId(userEntity.getUserId());
-//        private List<Activity> participatedActivityList;
         user.setUserName(userEntity.getUserName());
         user.setUserSchool(userEntity.getUserSchool());
         user.setUserGrade(userEntity.getUserGrade());

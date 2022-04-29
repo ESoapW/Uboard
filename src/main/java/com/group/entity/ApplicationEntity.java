@@ -17,11 +17,11 @@ public class ApplicationEntity {
 
     public static ApplicationEntity fromApplicationCreateInput(ApplicationCreateInput applicationCreateInput, Integer applicantId, Integer activityId){
         ApplicationEntity applicationEntity = new ApplicationEntity();
-        applicationEntity.setApplicationId((int)((Math.random() * 9 + 1) * 10000000));//8位随机数
-        applicationEntity.setApplicantId(applicantId); //从登陆状态读取
-        applicationEntity.setActivityId(activityId); //从申请的活动读取
+        applicationEntity.setApplicationId((int)((Math.random() * 9 + 1) * 10000000));//8 digits random number
+        applicationEntity.setApplicantId(applicantId); //fetch from login state
+        applicationEntity.setActivityId(activityId); //fetch from activity
         applicationEntity.setComments(applicationCreateInput.getComments());
-        applicationEntity.setApplicationStatus("applying"); //创建初始化状态
+        applicationEntity.setApplicationStatus("applying"); //initialize the state of application
         return applicationEntity;
     }
 

@@ -14,6 +14,7 @@ import java.io.*;
 @Controller
 public class FileUploadController {
 
+    //Upload the image to the specified folder and return the image storage path to the front end.
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public String upload(@RequestParam("pic") MultipartFile multipartFile, HttpServletRequest req ) {

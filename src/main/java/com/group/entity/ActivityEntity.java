@@ -14,21 +14,20 @@ public class ActivityEntity {
     @TableId
     private Integer activityId;
     private Integer initializerId;
-//    participants: [User!] #缺少
     private String activityName;
     private String imageUrl;
     private Date startTime;
-    private Date endTime; //java.util的Date可以直接映射到mysql的timeStamp
+    private Date endTime; //Date of java.util can be mapped directly to mysql timeStamp
     private String location;
     private String description;
     private Integer numOfParticipants;
     private Integer funds;
     private String requirements;
 
-    //initializerId从前端获取
+    //initializerId can be passed from frontend
     public static ActivityEntity fromActivityCreateInput(ActivityCreateInput activityCreateInput, Integer initializerId){
         ActivityEntity activityEntity = new ActivityEntity();
-        activityEntity.setActivityId((int)((Math.random() * 9 + 1) * 1000000));//七位随机数
+        activityEntity.setActivityId((int)((Math.random() * 9 + 1) * 1000000));//seven digits random number
         activityEntity.setInitializerId(initializerId);
         activityEntity.setActivityName(activityCreateInput.getActivityName());
         activityEntity.setImageUrl(activityCreateInput.getImageUrl());

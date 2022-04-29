@@ -13,9 +13,11 @@ public class MailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    //Define the e-mail sender
     @Value("gd008524@163.com")
     private String from;
 
+    //Invoke the third-party SimpleMailMessage service to automatically send emails
     public boolean sendMail(MailEntity mailEntity){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);

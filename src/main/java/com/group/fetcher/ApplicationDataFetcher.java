@@ -33,6 +33,7 @@ public class ApplicationDataFetcher {
         this.mailService = mailService;
     }
 
+    //query application
     @DgsQuery
     public List<Application> application(){
         List<ApplicationEntity> applicationEntityList = applicationEntityMapper.selectList(new QueryWrapper<>());
@@ -40,6 +41,7 @@ public class ApplicationDataFetcher {
         return applicationList;
     }
 
+    //create application
     @DgsMutation
     public Application createApplication(@InputArgument ApplicationCreateInput applicationCreateInput, Integer applicantId, Integer activityId){
         ApplicationEntity applicationEntity = ApplicationEntity.fromApplicationCreateInput(applicationCreateInput, applicantId, activityId);
@@ -48,18 +50,19 @@ public class ApplicationDataFetcher {
         return Application.fromApplicationEntity(applicationEntity);
     }
 
+    //approve application and send email to the applicant
     @DgsMutation
     public Application applicationApprove(@InputArgument Integer applicationId){
         ApplicationEntity applicationEntity = applicationEntityMapper.selectById(applicationId);
         applicationEntity.setApplicationStatus("approved");
         applicationEntityMapper.updateById(applicationEntity);
-        //从application中获取申请者的邮箱
+        // Get the email address of the applicant from application
         UserEntity userEntity = userEntityMapper.selectById(applicationEntity.getApplicantId());
         String email = userEntity.getEmail();
-        //从application中获取申请的活动
+        // Get the requested activity from application
         ActivityEntity activityEntity = activityEntityMapper.selectById(applicationEntity.getActivityId());
         String activityName = activityEntity.getActivityName();
-        //设置发送邮件的服务
+        // Set the mail sending service
         MailEntity mailEntity = new MailEntity();
         mailEntity.setTo(email);
         mailEntity.setSubject("Application in ActivitySystem");
@@ -68,18 +71,19 @@ public class ApplicationDataFetcher {
         return Application.fromApplicationEntity(applicationEntity);
     }
 
+    //deny application and send email to the applicant
     @DgsMutation
     public Application applicationDeny(@InputArgument Integer applicationId){
         ApplicationEntity applicationEntity = applicationEntityMapper.selectById(applicationId);
         applicationEntity.setApplicationStatus("denied");
         applicationEntityMapper.updateById(applicationEntity);
-        //从application中获取申请者的邮箱
+        // Get the email address of the applicant from application
         UserEntity userEntity = userEntityMapper.selectById(applicationEntity.getApplicantId());
         String email = userEntity.getEmail();
-        //从application中获取申请的活动
+        // Get the requested activity from application
         ActivityEntity activityEntity = activityEntityMapper.selectById(applicationEntity.getActivityId());
         String activityName = activityEntity.getActivityName();
-        //设置发送邮件的服务
+        // Set the mail sending service
         MailEntity mailEntity = new MailEntity();
         mailEntity.setTo(email);
         mailEntity.setSubject("Application in ActivitySystem");

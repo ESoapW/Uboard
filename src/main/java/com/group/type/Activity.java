@@ -26,7 +26,6 @@ public class Activity {
         Activity activity = new Activity();
         activity.setActivityId(activityEntity.getActivityId());
         activity.setInitializerId(activityEntity.getInitializerId());
-        //缺一个list
         activity.setActivityName(activityEntity.getActivityName());
         activity.setImageUrl(activityEntity.getImageUrl());
         activity.setStartTime(DateUtil.formatDateInISOString(activityEntity.getStartTime()));

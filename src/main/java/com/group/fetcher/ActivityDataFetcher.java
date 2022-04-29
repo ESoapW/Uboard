@@ -25,6 +25,7 @@ public class ActivityDataFetcher {
     private final ApplicationEntityMapper applicationEntityMapper;
 
 
+    //query for all activity
     @DgsQuery
     public List<Activity> activity(){
         List<ActivityEntity> activityEntityList = activityEntityMapper.selectList(new QueryWrapper<>());
@@ -33,6 +34,7 @@ public class ActivityDataFetcher {
         return activityList;
     }
 
+    //query for one activity with activityId
     @DgsQuery
     public Activity activityWithActivityId(Integer activityId){
         ActivityEntity activityEntity = activityEntityMapper.selectById(activityId);
@@ -40,17 +42,18 @@ public class ActivityDataFetcher {
         return activity;
     }
 
+    //create activity
     @DgsMutation
     public Activity createActivity(@InputArgument ActivityCreateInput activityCreateInput, Integer initializerId){
         ActivityEntity activityEntity = ActivityEntity.fromActivityCreateInput(activityCreateInput, initializerId);
         activityEntityMapper.insert(activityEntity);
-        //把activityEntity转成activity
+        //convert activityEntity to activity
         Activity activity = Activity.fromActivityEntity(activityEntity);
 
         return activity;
     }
 
-    //通过resolver的方式获取子节点的数据，如果前端需要的话才调用
+    //Get data from child nodes by resolver and call it if the front end needs it
     @DgsData(parentType = "Activity", field = "initializer")
     public User getInitializer(DgsDataFetchingEnvironment dfe){
         Activity activity = dfe.getSource();
@@ -75,7 +78,6 @@ public class ActivityDataFetcher {
         QueryWrapper<ApplicationEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(ApplicationEntity::getActivityId, activity.getActivityId()).and(i -> i.eq(ApplicationEntity::getApplicationStatus, "success"));
         List<ApplicationEntity> applicationEntityList = applicationEntityMapper.selectList(queryWrapper);
-       // List<Application> applicationList = applicationEntityList.stream().map(Application::fromApplicationEntity).collect(Collectors.toList());
         List<Application> applicationList = applicationEntityList.stream().map(
                 applicationEntity -> {
                     Application application = Application.fromApplicationEntity(applicationEntity);
@@ -84,7 +86,6 @@ public class ActivityDataFetcher {
                 }).collect(Collectors.toList());
         List<User> userList = applicationList.stream().map(e -> e.getApplicant()).collect(Collectors.toList());
         return userList;
-      //  return applicationList;
     }
 
     private void getUser(Application application, Integer applicantId){

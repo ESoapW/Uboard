@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <description>Build an app with GraphQL + SpringBoot + Netflix DGS + React + MyBatis-Plus + PostgreSQL</description>
-  <!-- 继承springboot父项目 -->
+  <!-- Inherits the SpringBoot parent project -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -68,7 +68,7 @@
       <artifactId>mybatis-plus-boot-starter</artifactId>
       <version>3.5.0</version>
     </dependency>
-<!--发送邮件的第三方api-->
+<!--A third-party API for sending mail-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-mail</artifactId>
@@ -86,7 +86,7 @@
       <scope>test</scope>
     </dependency>
 
-<!--    帮助自动添加get和set方法-->
+<!--   Help to automatically add get and set methods-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -157,10 +157,6 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
-<!--        <plugin>-->
-<!--          <artifactId>maven-war-plugin</artifactId>-->
-<!--          <version>3.2.2</version>-->
-<!--        </plugin>-->
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
@@ -180,57 +176,6 @@
                   <target>8</target>
               </configuration>
           </plugin>
-<!--        <plugin>-->
-<!--          <groupId>com.github.eirslett</groupId>-->
-<!--          <artifactId>frontend-maven-plugin</artifactId>-->
-<!--          <version>1.6</version>-->
-<!--          <executions>-->
-<!--            <execution>-->
-<!--              <id>install node and npm</id>-->
-<!--              <goals>-->
-<!--                <goal>install-node-and-npm</goal>-->
-<!--              </goals>-->
-<!--              <phase>generate-resources</phase>-->
-<!--              <configuration>-->
-<!--                <installDirectory>target</installDirectory>-->
-<!--                <workingDirectory>frontend</workingDirectory>-->
-<!--                <nodeVersion>v17.7.0</nodeVersion>-->
-<!--                <npmVersion>8.5.2</npmVersion>-->
-<!--              </configuration>-->
-<!--            </execution>-->
-<!--            <execution>-->
-<!--              <id>npm install</id>-->
-<!--              <goals>-->
-<!--                <goal>npm</goal>-->
-<!--              </goals>-->
-<!--              <phase>generate-resources</phase>-->
-<!--              <configuration>-->
-<!--                <arguments>install</arguments>-->
-<!--                <installDirectory>target</installDirectory>-->
-<!--                <workingDirectory>frontend</workingDirectory>-->
-<!--              </configuration>-->
-<!--            </execution>-->
-<!--            <execution>-->
-<!--              <id>npm run build</id>-->
-<!--              <goals>-->
-<!--                <goal>npm</goal>-->
-<!--              </goals>-->
-<!--              <phase>compile</phase>-->
-<!--              <configuration>-->
-<!--                <arguments>run build</arguments>-->
-<!--                <installDirectory>target</installDirectory>-->
-<!--                <workingDirectory>frontend</workingDirectory>-->
-<!--              </configuration>-->
-<!--            </execution>-->
-<!--          </executions>-->
-<!--          <configuration>-->
-<!--          <nodeVersion>v17.7.0</nodeVersion>-->
-<!--          <npmVersion>8.5.2</npmVersion>-->
-<!--          <nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>-->
-<!--          <npmDownloadRoot>https://registry.npm.taobao.org/npm/-/</npmDownloadRoot>-->
-
-<!--          </configuration>-->
-<!--        </plugin>-->
       </plugins>
   </build>
 </project>

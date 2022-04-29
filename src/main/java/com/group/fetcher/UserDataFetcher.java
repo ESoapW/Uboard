@@ -54,11 +54,11 @@ public class UserDataFetcher {
 
     @DgsMutation
     public User registerUser(@InputArgument UserRegisterInput userRegisterInput){
-        //由于密码不能明文存储，所以不采用fromUserRegisterInput的方式，而采用以下set的方式定义
-        //initializedActivityList通过data resolver实现，无需定义
+        // The password can not be stored in clear text, so instead of using fromUserRegisterInput, use the following set definition
+        // initializedActivityList through data resolver implementation without definition
         userIsExist(userRegisterInput);
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserId((int)((Math.random() * 9 + 1) * 100000));//六位随机数
+        userEntity.setUserId((int)((Math.random() * 9 + 1) * 100000));//6 digits random number
         userEntity.setUserName(userRegisterInput.getUserName());
         userEntity.setEmail(userRegisterInput.getEmail());
         userEntity.setPassword(passwordEncoder.encode(userRegisterInput.getPassword()));
@@ -111,7 +111,7 @@ public class UserDataFetcher {
         return activityList;
     }
 
-    //判断user的email是否已被注册
+    // Check whether user's email is registered
     private void userIsExist(UserRegisterInput userRegisterInput){
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(UserEntity::getEmail, userRegisterInput.getEmail());
