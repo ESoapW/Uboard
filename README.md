@@ -1,5 +1,4 @@
-# Uboard 
-## a web application to find partners for campus events
+# Uboard - a web application to find partners for campus events
 IT5007 Project
 
 ## Run on your local machine   
