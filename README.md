@@ -28,7 +28,8 @@ IT5007 Project
     Go to `localhost:5050/browser`, password: admin   
     Add a new server with properties:  
     Port: 5432, Database: postgres, Username: postgres, Password: changeme   
-    Run the sql query in `sql/activity.sql` to initialize the database   
+    Run the sql query in `sql/activity.sql` to initialize the database  
+    <br/>
 
 3. Start back-end server
 
@@ -36,7 +37,8 @@ IT5007 Project
     screen java -jar target/5007project.jar 
     ```
 
-    Detach from screen (ctrl/cmd + A + D)    
+    Detach from screen (ctrl/cmd + A + D)   
+    <br/>
 
 4. Set up and start file server
 
@@ -46,6 +48,7 @@ IT5007 Project
     ```
 
     Detach from screen (ctrl/cmd + A + D)   
+    <br/>
 
 5. Start frond-end server
 
