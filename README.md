@@ -2,11 +2,18 @@
 IT5007 Project
 
 ## Run on your local machine   
+
+0. Make sure you have installed node and npm
+   
+   ```
+   node --version
+   npm --version
+   ```
    
 1. Clone this repository
 
     ```
-    git clone https://github.com/Daisy1111/IT5007project.git
+    git clone https://github.com/ESoapW/Uboard.git
     cd
     ```   
 
