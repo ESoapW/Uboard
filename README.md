@@ -9,7 +9,13 @@ IT5007 Project
 http://54.149.15.71:3000/
 <br/>
 
-## Run on your local machine   
+## Test account
+We recommend that you log in with this admin account to better experience all the features, however, you can also register a new account.   
+`email: adminTest@u.nus.edu, password: admin`   
+The browser may warn of password compromise, but it doesn't matter.   
+<br/>
+
+## Set up and run on your local machine   
 
 0. Make sure you have installed node and npm
    
