@@ -19,7 +19,7 @@ import { useNavigate } from "react-router";
 import { goToHome, goToActivityCreated, goToActivityJoined } from "../Router/coordenation";
 import { setUser } from "./Context";
 
-
+// customized style
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
@@ -32,14 +32,20 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     paddingLeft: " 1%",
   },
-
-
   containerDetail:{
     display:'flex',
     justifyContent:"center",
     alignItems:"center",
     flexDirection: "column",
     width: "100%",
+  },
+  fabButton: {
+      backgroundColor: '#FFA500',
+      color: '#FFFFFF',
+      '&:hover': {
+        backgroundColor: '#dc9003',
+        color: '#e7e7e7',
+      }
   }
 }));
 
@@ -115,8 +121,7 @@ export default function BackToTop({ props, dataToScreen, isDetail, dataToHome}) 
           onClick={()=> goToHome(navigate) }>
           <img src={logo}/>
           </IconButton>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;
+          <Typography>&nbsp;&nbsp;&nbsp; </Typography>
           { isDetail ?  ""   :  <TextField
           value={search}
           className={classes.search}
@@ -183,9 +188,9 @@ export default function BackToTop({ props, dataToScreen, isDetail, dataToHome}) 
         <Box>
           {dataToScreen}
         </Box>
-      </Container>
+      </Container>      
       <ScrollTop {...props}>
-        <Fab color='secondary' size='small' aria-label='scroll back to top'>
+        <Fab className={classes.fabButton} size='small' aria-label='scroll back to top'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

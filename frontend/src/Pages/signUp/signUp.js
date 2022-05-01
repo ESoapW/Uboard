@@ -33,9 +33,9 @@ export default function SignUp() {
   async function register(userRegisterInput) {
     const query = `mutation registerUser($userRegisterInput: UserRegisterInput){
           registerUser(userRegisterInput: $userRegisterInput){
-          userId
-          userName
-          userSchool
+            userId
+            userName
+            userSchool
           }}`;
     const response = await fetch('http://localhost:8080/graphql', {
       method: 'POST',

@@ -23,12 +23,13 @@ const theme = createTheme({
 });
 
 const Details = () => {
-  const [detailCharacter, setDetailCharacter,detailCharacterRef] = useState({}); // activity details to be passed into card as props
+  const [detailActivity, setDetailActivity, detailActivityRef] = useState({}); // activity details to be passed into card as props
   const { id } = useParams(); 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData, setDataRef] = useState(); // data loaded from database
   const [comments, setComments, commentsRef] = useState();// comments state in the comments text box
   const [user] = useGlobalState('user'); // current logged in user
+  const [isJoined, setIsJoined, isJoinedRef] = useState(false);
 
   const navigate = useNavigate();
 
@@ -37,19 +38,22 @@ const Details = () => {
     setIsLoading(true);
     const query = `query activity{
         activity{
-    activityId
-    activityName
-    imageUrl
-    location
-    numOfParticipants
-    startTime
-    endTime
-    funds
-    description
-    requirements
-    initializer{
-      userName
-      userId
+          activityId
+          activityName
+          participants{
+            userId
+          }
+          imageUrl
+          location
+          numOfParticipants
+          startTime
+          endTime
+          funds
+          description
+          requirements
+          initializer{
+            userName
+            userId
     }}}`;
     const response = await fetch('http://localhost:8080/graphql', {
       method: 'POST',
@@ -61,7 +65,7 @@ const Details = () => {
         });
   }
 
-  // map activity data to 'detailCharacter' state
+  // map activity data to 'detailActivity' state
   useEffect(() => {
     setIsLoading(true);
     showActivity();
@@ -81,12 +85,14 @@ const Details = () => {
             requirements : setDataRef.current.data.activity[i].requirements,
             initializerId : setDataRef.current.data.activity[i].initializer.userId,
             initializerName : setDataRef.current.data.activity[i].initializer.userName,
+            participants : setDataRef.current.data.activity[i].participants,
           }
-          await setDetailCharacter(detail)
+          await setDetailActivity(detail)
+          // check if user already joined the activity
+          setIsJoined(detailActivityRef.current.participants.filter(participant => participant.userId == user).length > 0)
         }
       }
       await setIsLoading(false);
-      console.log(detailCharacter);
     },700)
   }, []);
 
@@ -95,7 +101,7 @@ const Details = () => {
     // get query variables
     const applicationCreateInput = {comments: commentsRef.current}
     const applicantId = user
-    const activityId = detailCharacter.activityId
+    const activityId = detailActivity.activityId
     
     if(!applicationCreateInput.comments){
       alert('Comments required!')
@@ -103,8 +109,8 @@ const Details = () => {
     } else {
       const query =  `mutation createApplication($applicationCreateInput: ApplicationCreateInput, $applicantId: Int, $activityId: Int){
           createApplication(applicationCreateInput: $applicationCreateInput,
-          applicantId: $applicantId
-          activityId: $activityId
+                            applicantId: $applicantId
+                            activityId: $activityId
           ){
             applicant{
               userId
@@ -131,25 +137,26 @@ const Details = () => {
     <ThemeProvider theme={theme}>
       <StyledContainer>
         <CardContainer>
-          <CardMui isDetail={true} character={detailCharacter} />
+          <CardMui isDetail={true} activity={detailActivity} />
           <StyledCard>
             <Typography color='primary' variant='h5' component='h2'>
-              {detailCharacter.activityName}
+              {detailActivity.activityName}
             </Typography>
 
             <Typography>&nbsp;</Typography>
-              <Typography color='secondary'>Start Time: {detailCharacter.startTime}</Typography>
-              <Typography color='secondary'>End Time: {detailCharacter.endTime}</Typography>
-              <Typography color='secondary'>Location: {detailCharacter.location}</Typography>
-              <Typography color='secondary'>Requirements: {detailCharacter.requirements}</Typography>
-              <Typography color='secondary'>Activity Funds: {detailCharacter.funds}</Typography>
-              <Typography color='secondary'>Number of participants: {detailCharacter.numOfParticipants}</Typography>
-              <Typography color='secondary'>Activity Description: {detailCharacter.description}</Typography>
-              <Typography color='secondary'>Organizer: {detailCharacter.initializerName}</Typography>
+              <Typography color='secondary'>Start Time: {detailActivity.startTime}</Typography>
+              <Typography color='secondary'>End Time: {detailActivity.endTime}</Typography>
+              <Typography color='secondary'>Location: {detailActivity.location}</Typography>
+              <Typography color='secondary'>Requirements: {detailActivity.requirements}</Typography>
+              <Typography color='secondary'>Activity Funds: {detailActivity.funds}</Typography>
+              <Typography color='secondary'>Number of participants: {detailActivity.numOfParticipants}</Typography>
+              <Typography color='secondary'>Activity Description: {detailActivity.description}</Typography>
+              <Typography color='secondary'>Organizer: {detailActivity.initializerName}</Typography>
             <Typography>&nbsp;</Typography>
 
             {/* check if activity is created by current logged in user */}
-            { (user != detailCharacterRef.current.initializerId) ?
+            {/* If user created or joined the activity, join button will not be shown */}
+            { (user != detailActivityRef.current.initializerId) && !isJoinedRef.current ?
             <Button
               type="submit"
               color="orange"
@@ -159,12 +166,16 @@ const Details = () => {
               Join
             </Button>
             :
-            <Typography color='primary' variant='h5' component='h2'>This is your activity!</Typography>
+              ( isJoinedRef.current ?
+              <Typography color='primary' variant='h5' component='h2'>You have joined this activity!</Typography>
+            : <Typography color='primary' variant='h5' component='h2'>You created this activity!</Typography>
+              )
             } 
 
             <Typography>&nbsp;</Typography>
 
-            { (user != detailCharacterRef.current.initializerId) &&
+            { (user != detailActivityRef.current.initializerId) && 
+               !isJoinedRef.current &&
             <TextField
                   required
                   multiline
@@ -178,7 +189,7 @@ const Details = () => {
                 
             }
 
-            { (user != detailCharacterRef.current.initializerId) &&
+            { (user != detailActivityRef.current.initializerId) &&
             <Typography>&nbsp;</Typography> }
             
             <Button

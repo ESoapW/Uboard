@@ -19,24 +19,24 @@ const Home = () => {
     async function showActivity(userId) {
         setIsLoading(true);
         const query = `query userWithUserId($userId: Int){
-        userWithUserId(userId: $userId){
-        userName
-        userId
-        participatedActivityList{
-        activityId
-        activityName
-        imageUrl
-        location
-        numOfParticipants
-        startTime
-        endTime
-        funds
-        description
-        requirements
-        initializer{
-        userName
-        userId
-        }
+            userWithUserId(userId: $userId){
+              userName
+              userId
+              participatedActivityList{
+                activityId
+                activityName
+                imageUrl
+                location
+                numOfParticipants
+                startTime
+                endTime
+                funds
+                description
+                requirements
+                initializer{
+                  userName
+                  userId
+                }
         }}}`;
         const response = await fetch('http://localhost:8080/graphql', {
             method: 'POST',
@@ -52,7 +52,6 @@ const Home = () => {
         setIsLoading(true);
         showActivity(user);
         setTimeout(async () => {
-            console.log(data)
             // filter the activities joined by user
             for(var i in setDataRef.current.data.userWithUserId.participatedActivityList){
                 const activity = {
@@ -87,10 +86,10 @@ const Home = () => {
     data1.filter(item => {
         return (item.activityName).toLowerCase().includes(searchData.toLowerCase())
       })
-      .map((character) => {
+      .map((activity) => {
         return (
-          <StyledCard key={character.activityId}>
-            <CardMui character={character} />
+          <StyledCard key={activity.activityId}>
+            <CardMui activity={activity} />
           </StyledCard>
         );
       });

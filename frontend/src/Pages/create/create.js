@@ -29,8 +29,8 @@ const theme = createTheme({
 // create activity query
 export async function activityCreate(activityCreateInput, initializerId) {
     const query = `mutation createActivity($activityCreateInput: ActivityCreateInput, $initializerId: Int){
-        createActivity(activityCreateInput: $activityCreateInput, initializerId: $initializerId){
-        activityId
+            createActivity(activityCreateInput: $activityCreateInput, initializerId: $initializerId){
+                activityId
         }}`;
     console.log(JSON.stringify({ activityCreateInput}))
     const response = await fetch('http://localhost:8080/graphql', {

@@ -84,10 +84,10 @@ const Home = () => {
         //console.log(item)
         return (item.activityName).toLowerCase().includes(searchData.toLowerCase())
       })
-      .map((character) => {
+      .map((activity) => {
         return (
-          <StyledCard key={character.activityId}>
-            <CardMui character={character} />
+          <StyledCard key={activity.activityId}>
+            <CardMui activity={activity} />
           </StyledCard>
         );
       });

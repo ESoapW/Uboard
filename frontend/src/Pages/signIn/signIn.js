@@ -39,8 +39,8 @@ export default function SignInSide(props) {
   // Login logic
   async function logIn(loginInput) {
     const query = `query login($loginInput: LoginInput!){
-        login(loginInput: $loginInput){
-        userId
+          login(loginInput: $loginInput){
+          userId
         }}`;
     //console.log(JSON.stringify({ loginInput}))
     const response = await fetch('http://localhost:8080/graphql', {

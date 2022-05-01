@@ -35,22 +35,22 @@ export default function Message() {
     async function showMessage(userId) {
         setIsLoading(true);
         const query = `query userWithUserId($userId: Int){
-        userWithUserId(userId: $userId){
-        initializedActivityList{
-        applications{
-        applicationId
-        applicationStatus
-        activity{
-        activityName
-        }
-        applicant{
-        userName
-        userGrade
-        userSchool
-        email
-        phoneNumber
-        }
-        comments
+          userWithUserId(userId: $userId){
+            initializedActivityList{
+              applications{
+                applicationId
+                applicationStatus
+                activity{
+                  activityName
+                }
+                applicant{
+                  userName
+                  userGrade
+                  userSchool
+                  email
+                  phoneNumber
+                }
+                comments
         }}}}`;
         const response = await fetch('http://localhost:8080/graphql', {
             method: 'POST',
@@ -59,7 +59,6 @@ export default function Message() {
         }).then(response => response.json())
             .then(data => {
                 setData(data)
-                console.log(data)
             });
     }
 
@@ -99,10 +98,10 @@ export default function Message() {
     async function handleClickAccept() {
       const appId = gridDataRef.current.applicationId
       const query =  `mutation applicationApprove($appId: Int ){
-        applicationApprove(applicationId: $appId){
-        applicationId
-        applicationStatus
-        }
+          applicationApprove(applicationId: $appId){
+            applicationId
+            applicationStatus
+          }
         }`;
       const response = await fetch('http://localhost:8080/graphql', {
         method: 'POST',
@@ -116,10 +115,10 @@ export default function Message() {
     async function handleClickReject() {
       const appId = gridDataRef.current.applicationId
       const query =  `mutation applicationDeny($appId: Int ){
-        applicationDeny(applicationId: $appId){
-        applicationId
-        applicationStatus
-        }
+          applicationDeny(applicationId: $appId){
+            applicationId
+            applicationStatus
+          }
         }`;
       const response = await fetch('http://localhost:8080/graphql', {
         method: 'POST',
