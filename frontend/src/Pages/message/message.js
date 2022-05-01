@@ -92,7 +92,7 @@ export default function Message() {
             }
             await setData1(Array.from(applications))
             await setIsLoading(false);
-        },500)
+        },700)
     }, []);
 
     // accept an application

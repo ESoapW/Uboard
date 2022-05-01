@@ -68,7 +68,7 @@ const Home = () => {
             }
             await setData1(Array.from(activitys))
             await setIsLoading(false);
-        },500)
+        },700)
     }, []);
 
   // load data after searching

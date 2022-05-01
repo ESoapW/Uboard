@@ -16,7 +16,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
 import logo from "./logo.png";
 import { useNavigate } from "react-router";
-import { goToHome, goToSignIn, goToCreate, goToMessage, goToActivityCreated, goToActivityJoined } from "../Router/coordenation";
+import { goToHome, goToActivityCreated, goToActivityJoined } from "../Router/coordenation";
 import { setUser } from "./Context";
 
 
@@ -97,6 +97,7 @@ export default function BackToTop({ props, dataToScreen, isDetail, dataToHome}) 
   return (
     <React.Fragment>
       <CssBaseline />
+      
       <AppBar
         style={{
           display: "flex",
@@ -129,7 +130,7 @@ export default function BackToTop({ props, dataToScreen, isDetail, dataToHome}) 
 
           <IconButton
             color="inherit"
-            onClick={()=> goToCreate(navigate) }>
+            onClick={()=> {window.location.href = '/createActivity' }}> 
           <Avatar sx={{ m: 1, bgcolor: "#F3902F" }}>
             <AddIcon />
           </Avatar>
@@ -156,7 +157,7 @@ export default function BackToTop({ props, dataToScreen, isDetail, dataToHome}) 
 
           <IconButton
           color="inherit"
-          onClick={()=> goToMessage(navigate) }>
+          onClick={()=> {window.location.href = '/message' } }>
           <Typography variant="h6" color="inherit" component="div">
           Messages
           </Typography>
@@ -167,7 +168,7 @@ export default function BackToTop({ props, dataToScreen, isDetail, dataToHome}) 
           onClick={()=> {
             setUser(0)
             localStorage.setItem('user', 0)
-            goToSignIn(navigate)
+            window.location.replace('../signIn')
           }}>
           <Typography variant="h6" color="inherit" component="div">
           Log Out

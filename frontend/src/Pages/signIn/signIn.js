@@ -66,7 +66,7 @@ export default function SignInSide(props) {
         password : data.get('password'),
     }
 
-    // This is 2 admin user to test
+    // This is 2 admin users to test
     if (loginInput.email=='adminTest@u.nus.edu'){
       setUser(111111)
       localStorage.setItem('user',111111)
@@ -124,7 +124,7 @@ export default function SignInSide(props) {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 8,
+              my: 12,
               mx: 4,
               display: 'flex',
               flexDirection: 'column',
@@ -157,10 +157,6 @@ export default function SignInSide(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
               />
               <Button
                 type="submit"

@@ -1,6 +1,14 @@
 # Uboard - a web application to find partners for campus events
 IT5007 Project
 
+## Video demo
+[Video demo]()
+<br/>
+
+## Access via public IP address
+http://54.149.15.71:3000/
+<br/>
+
 ## Run on your local machine   
 
 0. Make sure you have installed node and npm
@@ -26,9 +34,9 @@ IT5007 Project
     ```
 
     Go to `localhost:5050/browser`, password: admin   
-    Add a new server with properties:  
-    Port: 5432, Database: postgres, Username: postgres, Password: changeme   
-    Run the sql query in `sql/activity.sql` to initialize the database  
+    Add a new server with properties `Name: Uboard, Port: 5432`  
+    Add a new database with properties `Database: postgres, Username: postgres, Password: changeme`   
+    Using query tool and run the sql query in `sql/activity.sql` to initialize the database  
     <br/>
 
 3. Start back-end server
@@ -59,10 +67,8 @@ IT5007 Project
     npm start
     ```
 
-    The web app should pop up, if not, enter `localhost:3000` in your browser (Chrome is recommended)
+    The web app should pop up, if not, enter `localhost:3000` in your browser
 
-## Video
 
-[Presentation video]()
 
-[Set up tutorial]()
+

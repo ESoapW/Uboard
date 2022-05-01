@@ -84,9 +84,22 @@ export default function CreateActivity() {
             funds: inputCost,
             requirements: inputRequirements
         }
-        activityCreate(activityCreateInput, userId)
-        window.alert('Successfully created!')
-        goToHome(navigate)
+        // input validation
+        if (!activityCreateInput.activityName ||
+            !activityCreateInput.imageUrl ||
+            !activityCreateInput.startTime ||
+            !activityCreateInput.endTime ||
+            !activityCreateInput.location ||
+            !activityCreateInput.description ||
+            !activityCreateInput.numOfParticipants ||
+            !activityCreateInput.requirements){
+            alert('All information is required!')
+            return
+        } else {
+            activityCreate(activityCreateInput, userId)
+            window.alert('Successfully created!')
+            goToHome(navigate)
+        }    
     };
 
     // data to be shown on page, to be passed as props to header component

@@ -27,6 +27,7 @@ const theme = createTheme({
 export default function SignUp() {
   const [isRegistered, setIsRegistered, isRegisteredRef] = useState(false); // state check if current email is registered
   const navigate = useNavigate();
+  var pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // email validation regex
 
   // register query
   async function register(userRegisterInput) {
@@ -63,24 +64,38 @@ export default function SignUp() {
       phoneNumber : data.get('phoneNumber'),
       password : data.get('password'),
     }
-    register(userRegisterInput)
-    setTimeout(() => {
-      // check if email is already registered
-      if(isRegisteredRef.current) {
-        window.alert('Email has been already registered');
-        setIsRegistered(false);
-      } else {
-        window.alert('Register successful!');
-        goToSignIn(navigate);
-      }
+    if (!userRegisterInput.userName || 
+        !userRegisterInput.userSchool ||
+        !userRegisterInput.userGrade ||
+        !userRegisterInput.email ||
+        !userRegisterInput.phoneNumber ||
+        !userRegisterInput.password ){
+        alert("All information is required!") // check if all information is provided
+        return
+    } else if (!userRegisterInput.email.match(pattern)) { // email validation
+      alert('Wrong email format!')
       event.target.email.value = "";
-      event.target.phoneNumber.value = "";
-      event.target.password.value = "";
-      event.target.firstName.value = "";
-      event.target.lastName.value = "";
-      event.target.grade.value = ""
-      event.target.school.value = ""
-    }, 1000)
+      return
+    } else {
+      register(userRegisterInput)
+      setTimeout(() => {
+        // check if email is already registered
+        if(isRegisteredRef.current) {
+          window.alert('Email has been already registered!');
+          setIsRegistered(false);
+        } else {
+          window.alert('Register successful!');
+          goToSignIn(navigate);
+        }
+        event.target.email.value = "";
+        event.target.phoneNumber.value = "";
+        event.target.password.value = "";
+        event.target.firstName.value = "";
+        event.target.lastName.value = "";
+        event.target.grade.value = ""
+        event.target.school.value = ""
+      }, 1000)
+    }
   };
 
   return (

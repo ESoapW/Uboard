@@ -87,7 +87,7 @@ const Details = () => {
       }
       await setIsLoading(false);
       console.log(detailCharacter);
-    },500)
+    },700)
   }, []);
 
   // join an activity, create a new application and send to data base
@@ -97,28 +97,33 @@ const Details = () => {
     const applicantId = user
     const activityId = detailCharacter.activityId
     
-    const query =  `mutation createApplication($applicationCreateInput: ApplicationCreateInput, $applicantId: Int, $activityId: Int){
-        createApplication(applicationCreateInput: $applicationCreateInput,
-        applicantId: $applicantId
-        activityId: $activityId
-        ){
-          applicant{
-            userId
-            userName
+    if(!applicationCreateInput.comments){
+      alert('Comments required!')
+      return
+    } else {
+      const query =  `mutation createApplication($applicationCreateInput: ApplicationCreateInput, $applicantId: Int, $activityId: Int){
+          createApplication(applicationCreateInput: $applicationCreateInput,
+          applicantId: $applicantId
+          activityId: $activityId
+          ){
+            applicant{
+              userId
+              userName
+            }
+            activity{
+              activityName
+              activityId
+            }
           }
-          activity{
-            activityName
-            activityId
-          }
-        }
-      }`;
-    const response = await fetch('http://localhost:8080/graphql', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ query, variables: { applicationCreateInput, applicantId, activityId} })
-    });
-    window.alert("Request sent!")
-    goToHome(navigate)
+        }`;
+      const response = await fetch('http://localhost:8080/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ query, variables: { applicationCreateInput, applicantId, activityId} })
+      });
+      window.alert("Request sent!")
+      goToHome(navigate)
+    }
   };
 
   // data to be shown on page, to be passed as props to header component

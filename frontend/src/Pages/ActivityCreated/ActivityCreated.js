@@ -73,7 +73,7 @@ const Home = () => {
             }
             await setData1(Array.from(activitys))
             await setIsLoading(false);
-        },500)
+        },700)
     }, []);
 
   const dataToHome = (dataFromHeader) => {
