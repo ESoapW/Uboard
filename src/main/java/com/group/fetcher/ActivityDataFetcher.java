@@ -76,7 +76,7 @@ public class ActivityDataFetcher {
     public List<User> getParticipants(DgsDataFetchingEnvironment dfe){
         Activity activity = dfe.getSource();
         QueryWrapper<ApplicationEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(ApplicationEntity::getActivityId, activity.getActivityId()).and(i -> i.eq(ApplicationEntity::getApplicationStatus, "success"));
+        queryWrapper.lambda().eq(ApplicationEntity::getActivityId, activity.getActivityId()).and(i -> i.eq(ApplicationEntity::getApplicationStatus, "approved"));
         List<ApplicationEntity> applicationEntityList = applicationEntityMapper.selectList(queryWrapper);
         List<Application> applicationList = applicationEntityList.stream().map(
                 applicationEntity -> {
