@@ -10,7 +10,7 @@ http://54.149.15.71:3000/
 <br/>
 
 ## Test account
-We recommend that you log in with this admin account to better experience all the features, however, you can also register a new account.   
+You are recommended to log in with this admin account to better experience all the features, however, you can also register a new account.   
 email: `adminTest@u.nus.edu`, password: `admin`   
 The browser may warn of password compromise, but it doesn't matter.   
 
