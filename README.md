@@ -16,9 +16,10 @@ The browser may warn of password compromise, but it doesn't matter.
 
 ## Set up and run on your local machine   
 
-0. Make sure you have installed node and npm
+0. Make sure you have installed docker, java, node and npm
    
    ```
+   java -version
    node --version
    npm --version
    ```
