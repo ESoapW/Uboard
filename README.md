@@ -2,7 +2,7 @@
 IT5007 Project
 
 ## Video demo
-[Video demo]()
+[Video demo](https://www.dropbox.com/s/c0n8k273kqfmbaa/Uboard%20demo.mov?dl=0)
 <br/>
 
 ## Access via public IP address
@@ -38,7 +38,7 @@ The browser may warn of password compromise, but it doesn't matter.
     docker compose up
     ```
 
-    Go to `localhost:5050/browser`, password: admin   
+    Go to `localhost:5050/browser`, password: `admin`  
     Add a new server with properties `Name: Uboard, Port: 5432`  
     Add a new database with properties `Database: postgres, Username: postgres, Password: changeme`   
     Using query tool and run the sql query in `sql/activity.sql` to initialize the database  
@@ -47,7 +47,7 @@ The browser may warn of password compromise, but it doesn't matter.
 3. Start back-end server
 
     ```
-    screen java -jar target/5007project.jar 
+    screen java -jar target/5007project.jar
     ```
 
     Detach from screen (ctrl/cmd + A + D)   
