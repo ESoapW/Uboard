@@ -6,7 +6,7 @@ IT5007 Project
 <br/>
 
 ## Access via public IP address
-~~http://54.149.15.71:3000/~~ Instance has been stopped
+~~54.149.15.71:3000~~ Instance has been stopped
 <br/>
 
 ## Test account
